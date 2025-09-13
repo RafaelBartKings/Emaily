@@ -10,6 +10,15 @@ module.exports = app => {
 
    app.get('/auth/google/callback', passport.authenticate('google'));
 
+   app.get('/api/logout', (req, res, next) => {
+      req.logout(err => {
+         if (err) {
+            return next(err);
+         }
+         res.redirect('/');
+      });
+   });
+
    app.get('/api/current_user', (req, res) => {
       res.send(req.user);
    });
