@@ -8,12 +8,15 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "concurrently": "^9.2.1",
     "express": "^4.19.2",
     "express-session": "^1.18.2",
     "mongodb": "^6.19.0",
