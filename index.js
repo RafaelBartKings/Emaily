@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session'); // Mudei aqui
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 require('./models/user');
 require('./services/passport');
@@ -12,6 +13,8 @@ mongoose
    .catch(err => console.error('❌ Erro de conexão:', err.message));
 
 const app = express();
+
+app.use(bodyParser.json());
 
 // Adicione a configuração do express-session
 app.use(
