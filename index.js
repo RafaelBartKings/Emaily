@@ -31,10 +31,9 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
-
-app.get('/', (req, res) => {
-   res.send('Olá, a aplicação está funcionando!');
-});
+// app.get('/', (req, res) => {
+//    res.send('Olá, a aplicação está funcionando!');
+// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
