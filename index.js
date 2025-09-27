@@ -38,19 +38,14 @@ require('./routes/billingRoutes')(app);
 //    res.send('Olá, a aplicação está funcionando!');
 // });
 
-// =======================================================
-// >>> CÓDIGO DE PRODUÇÃO (ESSENCIAL PARA O VERCEL) <<<
-// =======================================================
 if (process.env.NODE_ENV === 'production') {
-   // 1. Express servirá os arquivos estáticos (main.js, main.css) da build do cliente.
+   // Serve arquivos estáticos como imagens, CSS, JS
    app.use(express.static('client/build'));
-
-   // 2. Express servirá o index.html para todas as outras rotas não reconhecidas (para o React Router).
+   // Serve o index.html se a rota não for reconhecida
    app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
    });
 }
-// =======================================================
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
