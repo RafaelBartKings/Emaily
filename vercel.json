@@ -20,8 +20,12 @@
 			"dest": "/index.js"
 		},
 		{
+			"src": "/static/(.*)",
+			"dest": "/client/build/static/$1"
+		},
+		{
 			"src": "/(.*)",
-			"dest": "/client/build/$1"
+			"dest": "/client/build/index.html"
 		}
 	]
 }
