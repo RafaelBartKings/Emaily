@@ -1,7 +1,5 @@
 // prod.js - production keys here - do not commit this file to GitHub!
 
-const { stripeSecretKey } = require('./dev');
-
 module.exports = {
    googleClientID: process.env.GOOGLE_CLIENT_ID,
    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
