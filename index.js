@@ -39,9 +39,20 @@ require('./routes/billingRoutes')(app);
 // });
 
 if (process.env.NODE_ENV === 'production') {
-   // Serve arquivos estáticos como imagens, CSS, JS
-   app.use(express.static('client/build'));
-   // Serve o index.html se a rota não for reconhecida
+   const path = require('path');
+
+   // Serve arquivos estáticos
+   app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+   // Exceções: não deixar o catch-all interceptar o manifest.json ou favicon
+   app.get(
+      ['/manifest.json', '/favicon.ico', '/logo192.png', '/logo512.png'],
+      (req, res) => {
+         res.sendFile(path.resolve(__dirname, 'client', 'build', req.path));
+      }
+   );
+   
+   // Catch-all: qualquer outra rota cai no React
    app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
    });
