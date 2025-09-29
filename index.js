@@ -33,11 +33,8 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
-// REMOVENDO a rota de teste, conforme discutido.
-// app.get('/', (req, res) => {
-//    res.send('Olá, a aplicação está funcionando!');
-// });
 
 if (process.env.NODE_ENV === 'production') {
    const path = require('path');
