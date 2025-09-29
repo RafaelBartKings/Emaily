@@ -1,5 +1,7 @@
 // prod.js - production keys here - do not commit this file to GitHub!
 
+const { sendGridKey } = require('./dev');
+
 module.exports = {
    googleClientID: process.env.GOOGLE_CLIENT_ID,
    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -7,5 +9,6 @@ module.exports = {
    cookieKey: process.env.COOKIE_KEY,
    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
-   googleCallbackURL: 'https://emaily-coral.vercel.app/auth/google/callback'
+   googleCallbackURL: 'https://emaily-coral.vercel.app/auth/google/callback',
+   sendGridKey: process.env.SEND_GRID_KEY
 };
