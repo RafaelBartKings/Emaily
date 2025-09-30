@@ -6,6 +6,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from './reducers';
 import reduxThunk from 'redux-thunk';
 
+// Development  only: axios setup
+import axios from 'axios';
+window.axios = axios;
+
 const store = configureStore({
    reducer: rootReducer,
    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(reduxThunk)

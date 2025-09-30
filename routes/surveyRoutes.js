@@ -13,7 +13,7 @@ module.exports = app => {
       const survey = new Survey({
          title,
          subject,
-         body,
+         body, // Este 'body' é o texto da pergunta, não o HTML
          recipients: recipients
             .split(',')
             .map(email => ({ email: email.trim() })),
@@ -21,14 +21,21 @@ module.exports = app => {
          dateSent: Date.now()
       });
 
-      // Send the survey email
+      // 1. GERAR O HTML COMPLETO:
+      // Chama a função 'surveyTemplates' passando o objeto 'survey' para gerar o HTML.
+      const htmlBody = surveyTemplates(survey);
+
+      // 2. ENVIAR O HTML:
+      // Agora o primeiro argumento é o 'htmlBody' (a string HTML formatada)
       try {
-         await Mailer(survey.body, survey.subject, survey.recipients);
+         await Mailer(htmlBody, survey.subject, survey.recipients);
+
          await survey.save();
          req.user.credits -= 1;
          const user = await req.user.save();
          res.send(user);
       } catch (err) {
+         console.error(err);
          res.status(422).send(err);
       }
    });

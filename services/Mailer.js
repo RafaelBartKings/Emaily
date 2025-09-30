@@ -16,8 +16,11 @@ module.exports = async (body, subject, recipients) => {
       to: recipients[0].email,
       from: senderEmail, // Apenas a string do email
       subject,
-      text: body
-      // Para enviar HTML, você usaria: html: '<strong>' + body + '</strong>'
+      // CORREÇÃO CRÍTICA: 'body' já é a string HTML completa do template.
+      // Apenas use a variável diretamente, sem adicionar tags '<strong>'.
+      html: body,
+      // Adiciona uma versão em texto puro para fallback
+      text: 'Por favor, responda a pesquisa clicando em um dos links: Sim ou Não.'
    };
 
    try {
