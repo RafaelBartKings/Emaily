@@ -8,9 +8,9 @@ module.exports = {
    cookieKey: process.env.COOKIE_KEY,
    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
-   // Note: O redirectDomain deve ser usado para construir o URL de callback
-   googleCallbackURL: process.env.REDIRECT_DOMAIN + 'auth/google/callback',
+   // Com o REDIRECT_DOMAIN como a URL raiz, precisamos adicionar a barra aqui.
+   googleCallbackURL: process.env.REDIRECT_DOMAIN + '/auth/google/callback',
    sendGridKey: process.env.SEND_GRID_KEY,
-   mailFrom: process.env.MAIL_FROM, // Chave que faltava para o SendGrid
+   mailFrom: process.env.MAIL_FROM,
    redirectDomain: process.env.REDIRECT_DOMAIN
 };
