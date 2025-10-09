@@ -4,8 +4,9 @@ const session = require('express-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
-// Necessário para o path
 const path = require('path');
+// 🚨 NOVO CÓDIGO: Importar CORS
+const cors = require('cors');
 
 require('./models/user');
 require('./services/passport');
@@ -18,7 +19,18 @@ mongoose
 
 const app = express();
 
+app.set('trust proxy', true);
+
 app.use(bodyParser.json());
+
+// 🚨 NOVO CÓDIGO: Configuração do CORS para permitir cookies/sessões entre portas
+app.use(
+   cors({
+      origin: 'http://localhost:3000', // Permite a porta do React
+      credentials: true // CRUCIAL: Permite o envio de cookies de sessão
+   })
+);
+// Fim do NOVO CÓDIGO
 
 app.use(
    session({
@@ -34,7 +46,6 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
-
 
 if (process.env.NODE_ENV === 'production') {
    const path = require('path');
@@ -58,6 +69,5 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-   // Adicione um log aqui, se quiser confirmar a porta no local:
    console.log(`Server listening on port ${PORT}`);
 });

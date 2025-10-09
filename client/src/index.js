@@ -9,6 +9,7 @@ import reduxThunk from 'redux-thunk';
 // Development  only: axios setup
 import axios from 'axios';
 window.axios = axios;
+axios.defaults.withCredentials = true;
 
 const store = configureStore({
    reducer: rootReducer,
