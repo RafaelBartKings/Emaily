@@ -23,11 +23,13 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-session": "^1.18.2",
+    "lodash": "^4.17.21",
     "mongodb": "^6.19.0",
     "mongoose": "^6.12.0",
     "nodemon": "^3.1.10",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
+    "path-parser": "^6.1.0",
     "stripe": "^18.5.0"
   },
   "devDependencies": {

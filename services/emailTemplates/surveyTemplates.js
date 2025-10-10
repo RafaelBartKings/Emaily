@@ -9,8 +9,8 @@ module.exports = survey => {
                <p>Please answer the following question:</p>
                <p>${survey.body}</p>
                <div>
-                  <a href="${keys.redirectDomain}/api/surveys/thanks" style="margin: 0 10px; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Yes</a>
-                  <a href="${keys.redirectDomain}/api/surveys/thanks" style="margin: 0 10px; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">No</a>
+                  <a href="${keys.redirectDomain}/api/surveys/${survey.id}/yes" style="margin: 0 10px; padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;">Yes</a>
+                  <a href="${keys.redirectDomain}/api/surveys/${survey.id}/no" style="margin: 0 10px; padding: 10px 20px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 5px;">No</a>
                </div>
             </div>
          </body>
