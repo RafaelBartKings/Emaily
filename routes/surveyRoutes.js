@@ -18,7 +18,7 @@ module.exports = app => {
    app.post('/api/surveys/webhooks', (req, res) => {
       const p = new Path('/api/surveys/:surveyId/:choice');
 
-      const events = _.chain(req.body)
+      _.chain(req.body)
          .map(req.body, ({ email, url }) => {
             const match = p.test(new URL(url).pathname);
 
@@ -28,9 +28,20 @@ module.exports = app => {
          })
          .compact()
          .uniqBy('email', 'surveyId')
+         .each(({ surveyId, email, choice }) => {
+            Survey.updateOne(
+               {
+                  _id: surveyId,
+                  recipients: { $elemMatch: { email: email, responded: false } }
+               },
+               {
+                  $inc: { [choice]: 1 }, // Incrementa a contagem de 'yes' ou 'no'
+                  $set: { 'recipients.$.responded': true }, // Marca como respondido
+                  lastResponded: new Date() // Atualiza a data da última resposta
+               }
+            ).exec();
+         })
          .value();
-
-      console.log(events);
 
       res.send({}); // Responde com 200 OK vazio
    });
