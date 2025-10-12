@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER, FETCH_SURVEYS } from './types';
 
 // O Axios defaults withCredentials é configurado globalmente para enviar cookies/sessão.
 axios.defaults.withCredentials = true;
@@ -42,4 +42,9 @@ export const submitSurvey = (values, history) => async dispatch => {
          console.error('Erro de envio desconhecido:', error);
       }
    }
+};
+
+export const fetchSurveys = () => async dispatch => {
+   const res = await axios.get('/api/surveys');
+   dispatch({ type: FETCH_SURVEYS, payload: res.data });
 };
